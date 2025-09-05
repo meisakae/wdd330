@@ -10,7 +10,10 @@
     "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\"",
     "test": "jest"
   },
-  "author": "Shane Thompson",
+  "authors": [
+    "Shane Thompson",
+    "Nephi Asha"
+  ],
   "license": "ISC",
   "devDependencies": {
     "eslint": "^8.56.0",
