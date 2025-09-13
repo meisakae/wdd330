@@ -28,3 +28,12 @@ export function getParam(param) {
   const product = urlParams.get(param);
   return product
 }
+
+function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  const htmlStrings = list.map(productCardTemplate);
+
+  if (clear) {
+    parentElement.innerHTM = "";
+  }
+  this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
+}
