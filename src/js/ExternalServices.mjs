@@ -8,7 +8,7 @@ function convertToJson(res) {
   }
 }
 
-export default class ProductData {
+export default class ExternalServices {
   constructor(category) {
     this.category = category;
     this.path = `../json/${this.category}.json`;
@@ -17,10 +17,25 @@ export default class ProductData {
   async getData(category) {
   const response = await fetch(`${baseURL}products/search/${category} `);
   const data = await convertToJson(response);
+
   return data.Result;
-}
+  }
+
   async findProductById(id) {
-    const products = await this.getData();
-    return products.find((item) => item.Id === id);
+    const response = await fetch(`${baseURL}product/${id}`);
+    const data = await convertToJson(response);
+    // console.log(data.Result);
+    return data.Result;
+  }
+
+  async checkout(payload) {
+    const option = {
+      method: "POST",
+      header: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    };
+    return await fetch(`${baseURL}checkout/`,option).then(convertToJson);
   }
 }
