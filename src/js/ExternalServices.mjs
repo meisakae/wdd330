@@ -1,11 +1,11 @@
 // const BASE_URL = import.meta.env.VITE_SERVER_URL;
 const BASE_URL = "https://wdd330-backend.onrender.com/"
 
-function convertToJson(res) {
+async function convertToJson(res) {
   if (res.ok) {
     return res.json();
   } else {
-    throw new Error("Bad Response");
+    throw {name: 'servicesError', message: jsosnResponse};
   }
 }
 
