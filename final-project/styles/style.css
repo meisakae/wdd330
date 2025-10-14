@@ -1,0 +1,217 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", "Noto Sans JP", sans-serif;
+}
+
+/* Body */
+body {
+  background: linear-gradient(to bottom, #ffd7a0, #ff9a76);
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header {
+  background-color: rgba(255, 123, 77, 0.9);
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* Main Section */
+main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/*  Nutrient Select Section */
+#nutrition-select {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#nutrition-select h2 {
+  margin-bottom: 1rem;
+  color: #b44a2a;
+}
+
+#nutrientDropdown, #getRecipesBtn {
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: none;
+  margin: 0.5rem;
+}
+
+#nutrientDropdown {
+  background: #fff5ec;
+  color: #444;
+}
+
+#getRecipesBtn {
+  background: #ff7b4d;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#getRecipesBtn:hover {
+  background: #ff944d;
+}
+
+/* Recipe Cards */
+#recipeContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.recipe-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  text-align: center;
+  padding: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.recipe-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.recipe-card h3 {
+  margin-top: 0.8rem;
+  font-size: 1.1rem;
+  color: #b44a2a;
+}
+
+#favorites-section {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+#showFavoritesBtn {
+  background-color: #ff7b4d; /* 柔らかいオレンジ */
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#showFavoritesBtn:hover {
+  background-color: #ff944d;
+}
+
+/* ===== Favorites List ===== */
+.fav-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem auto;
+  max-width: 600px;
+}
+
+.fav-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  background: linear-gradient(135deg, #fff4e3, #ffe0cc);
+  border: 1px solid #ffd1a4;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 2px 6px rgba(255, 140, 90, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fav-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 150, 100, 0.35);
+}
+
+.fav-list img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #ffc49b;
+}
+
+.fav-list div {
+  flex: 1;
+  color: #5a3921;
+  font-weight: 500;
+}
+
+.fav-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.fav-actions button {
+  background-color: #ff9966;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.fav-actions button:hover {
+  background-color: #ff7b42;
+  transform: scale(1.05);
+}
+
+.meal-details h2 {
+  color: #ff7b42;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.meal-details p {
+  color: #5a3921;
+}
+
+.meal-details .fav-list-title {
+  text-align: center;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #ff6f3c;
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  background-color: rgba(255, 123, 77, 0.9);
+  color: white;
+  text-align: center;
+  padding: 0.8rem 0;
+  font-size: 0.9rem;
+}

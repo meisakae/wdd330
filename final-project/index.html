@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD330 | Mei Sakae | Final Project</title>
+    <meta name="description" content="This project is web app that supporting of people's meal nutritions with uses Apis to show dynamic data and interactive content">
+    <meta name="author" content="Mei Sakae">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Nutrition Recipes App!</h1>
+    </header>
+    <main>
+        <section id="nutrition-select">
+            <h2>Select a nutrient</h2>
+            <select id="nutrientDropdown">
+                <option value=""> -- Choose one -- </option>
+                <option value="carbs">Carbohydrates</option>
+                <option value="protein">Protein</option>
+                <option value="fat">Fat</option>
+                <option value="vitamin">Vitamins</option>
+                <option value="mineral">Minerals</option>
+            </select>
+
+            <button id="getRecipesBtn" class="main-btn">Show Recipes</button>
+            <button id="showFavoritesBtn" class="main-btn">Check Favorites</button>
+        </section>
+
+        <section id="recipeContainer"></section>
+
+        <template id="recipeTemplate">
+            <div class="recipe-card">
+                <h3 class="meal-name"></h3>
+                <img class="meal-img" src="" alt="Meal image">
+            </div>
+        </template> 
+    </main>
+
+    <footer id="main-footer">
+        <p>&copy; <span id="year"></span> Nutrition Recipe App</p>
+        <p>WDD330 Mei Sakae</p>
+    </footer>
+</body>
+</html>
