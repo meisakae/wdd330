@@ -67,26 +67,92 @@ getRecipesBtn.addEventListener("click", async function () {
 // ===== Meal Details =====
 async function showMealDetails(mealId) {
   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
-  const response = await fetch(url);
-  const data = await response.json();
-  const meal = data.meals[0];
+  
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    const meal = data.meals[0];
 
-  recipeContainer.innerHTML = `
-    <div class="meal-details">
-      <h2>${meal.strMeal}</h2>
-      <img src="${meal.strMealThumb}" alt="${meal.strMeal}" width="250">
-      <p><strong>Area:</strong> ${meal.strArea}</p>
-      <p><strong>Instructions:</strong> ${meal.strInstructions}</p>
-      <div class="detail-buttons">
-        <button id="saveFavoriteBtn" class="main-btn"> Save to Favorites </button>
-        <button id="backBtn" class="main-btn"> ⬅ Back </button>
+    recipeContainer.innerHTML = `
+      <div class="meal-details">
+        <h2>${meal.strMeal}</h2>
+        <img src="${meal.strMealThumb}" alt="${meal.strMeal}" width="250">
+        <p><strong>Area:</strong> ${meal.strArea}</p>
+        <p><strong>Instructions:</strong> ${meal.strInstructions}</p>
+        <div class="detail-buttons">
+          <button id="saveFavoriteBtn" class="main-btn">Save to Favorites</button>
+          <button id="nutritionBtn" class="main-btn">Show Nutrition Info</button>
+          <button id="backBtn" class="main-btn">Back</button>
+        </div>
+        <div id="nutritionInfo"></div>
       </div>
-    </div>
-  `;
+    `;
 
-  document.getElementById("saveFavoriteBtn").addEventListener("click", () => saveFavorite(meal));
-  document.getElementById("backBtn").addEventListener("click", () => getRecipesBtn.click());
+    // --- Save to favorites ---
+    document.getElementById("saveFavoriteBtn").addEventListener("click", () => {
+      saveFavorite(meal);
+    });
+
+    // --- Show nutrition info ---
+    document.getElementById("nutritionBtn").addEventListener("click", async () => {
+      const ingredient = meal.strIngredient1;
+      await showNutrition(ingredient);
+    });
+
+    // --- Back button ---
+    document.getElementById("backBtn").addEventListener("click", () => {
+      getRecipesBtn.click();
+    });
+
+  } catch (error) {
+    console.error("Error fetching meal details:", error);
+    recipeContainer.innerHTML = `<p>Error loading meal details.</p>`;
+  }
 }
+
+// ===== Nutrition Info (Nutritionix API) =====
+async function showNutrition(ingredient) {
+  const url = "https://trackapi.nutritionix.com/v2/natural/nutrients";
+
+  const appId = "7c80e27c";
+  const appKey = "6cf0edf76911cb9a81db1b6be5fb73a4";
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-app-id": appId,
+        "x-app-key": appKey
+      },
+      body: JSON.stringify({ query: ingredient })
+    });
+
+    if(!response.ok) {
+        throw new Error(`API request failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const food = data.foods && data.foods[0];
+    const nutritionDiv = document.getElementById("nutritionInfo");
+
+    if (food) {
+      nutritionDiv.innerHTML = `
+        <h3>Nutrition Info for ${ingredient}</h3>
+        <p><strong>Calories:</strong> ${food.nf_calories} kcal</p>
+        <p><strong>Protein:</strong> ${food.nf_protein} g</p>
+        <p><strong>Carbs:</strong> ${food.nf_total_carbohydrate} g</p>
+        <p><strong>Fat:</strong> ${food.nf_total_fat} g</p>
+      `;
+    } else {
+      nutritionDiv.innerHTML = "<p>No nutrition info found.</p>";
+    }
+  } catch (error) {
+    console.error("Error fetching nutrition:", error);
+    document.getElementById("nutritionInfo").innerHTML = "<p>Error loading nutrition info.</p>";
+  }
+}
+
 
 // ===== お気に入り　保存機能 =====
 function saveFavorite(meal) {
